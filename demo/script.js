@@ -2,6 +2,7 @@
 let projects = [];
 let tasks = [];
 let categories = ['Personnel', 'Travail', 'Courses', 'Autre'];
+let tags = ['Important', 'Urgent', 'En attente', 'À revoir'];
 let currentFilter = 'all';
 
 // Gestion du thème
@@ -71,6 +72,7 @@ function addTask() {
     const dueDate = document.getElementById('taskDueDate');
     const priority = document.getElementById('taskPriority');
     const category = document.getElementById('taskCategory');
+    const taskTags = Array.from(document.querySelectorAll('input[name="taskTags"]:checked')).map(cb => cb.value);
     
     const taskText = input.value.trim();
     const projectId = parseInt(projectSelect.value);
@@ -84,6 +86,7 @@ function addTask() {
             dueDate: dueDate.value,
             priority: priority.value,
             category: category.value,
+            tags: taskTags,
             createdAt: new Date().toISOString()
         });
         
@@ -91,6 +94,7 @@ function addTask() {
         dueDate.value = '';
         priority.value = 'low';
         category.value = 'Autre';
+        document.querySelectorAll('input[name="taskTags"]').forEach(cb => cb.checked = false);
         
         updateTaskList();
         updateStatistics();
@@ -178,6 +182,9 @@ function updateTaskList() {
                     </span>` : ''}
                     <span class="task-project">
                         <i class="fas fa-project-diagram"></i> ${project?.name}
+                    </span>
+                    <span class="task-tags">
+                        ${task.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </span>
                 </div>
                 <div class="task-actions">
