@@ -3,17 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Démo Git - Gestionnaire de Tâches</title>
+    <title>Démo Git - Gestionnaire de Projets</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Gestionnaire de Tâches</h1>
-        <div class="task-form">
-            <input type="text" id="taskInput" placeholder="Nouvelle tâche...">
-            <button onclick="addTask()">Ajouter</button>
+        <header>
+            <h1>Gestionnaire de Projets</h1>
+            <div class="theme-switch">
+                <i class="fas fa-moon"></i>
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider round"></span>
+                </label>
+                <i class="fas fa-sun"></i>
+            </div>
+        </header>
+
+        <div class="project-section">
+            <h2>Projets</h2>
+            <div class="project-form">
+                <input type="text" id="projectInput" placeholder="Nouveau projet...">
+                <button onclick="addProject()">Ajouter Projet</button>
+            </div>
+            <div id="projectList"></div>
         </div>
-        <ul id="taskList"></ul>
+
+        <div class="task-section">
+            <h2>Tâches</h2>
+            <div class="task-form">
+                <select id="projectSelect">
+                    <option value="">Sélectionner un projet</option>
+                </select>
+                <input type="text" id="taskInput" placeholder="Nouvelle tâche...">
+                <input type="date" id="taskDueDate">
+                <select id="taskPriority">
+                    <option value="low">Basse</option>
+                    <option value="medium">Moyenne</option>
+                    <option value="high">Haute</option>
+                </select>
+                <button onclick="addTask()">Ajouter Tâche</button>
+            </div>
+            <div class="task-filters">
+                <button onclick="filterTasks('all')" class="active">Toutes</button>
+                <button onclick="filterTasks('active')">En cours</button>
+                <button onclick="filterTasks('completed')">Terminées</button>
+            </div>
+            <div id="taskList"></div>
+        </div>
+
+        <div class="statistics">
+            <h2>Statistiques</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <span id="totalProjects">0</span>
+                    <p>Projets</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-tasks"></i>
+                    <span id="totalTasks">0</span>
+                    <p>Tâches</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="completedTasks">0</span>
+                    <p>Terminées</p>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

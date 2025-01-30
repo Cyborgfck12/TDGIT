@@ -63,7 +63,7 @@ La partie pratique illustre :
 - Commandes avancées (rebase, cherry-pick, stash)
 
 ## Auteur
-[Votre Nom]
+Paul Amar ; Ahmed Djamour , Mikhael Peres
 
 ## Licence
 Ce projet est sous licence MIT.
