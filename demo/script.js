@@ -1,6 +1,7 @@
 // Structure de données
 let projects = [];
 let tasks = [];
+let categories = ['Personnel', 'Travail', 'Courses', 'Autre'];
 let currentFilter = 'all';
 
 // Gestion du thème
@@ -69,6 +70,7 @@ function addTask() {
     const input = document.getElementById('taskInput');
     const dueDate = document.getElementById('taskDueDate');
     const priority = document.getElementById('taskPriority');
+    const category = document.getElementById('taskCategory');
     
     const taskText = input.value.trim();
     const projectId = parseInt(projectSelect.value);
@@ -81,12 +83,14 @@ function addTask() {
             completed: false,
             dueDate: dueDate.value,
             priority: priority.value,
+            category: category.value,
             createdAt: new Date().toISOString()
         });
         
         input.value = '';
         dueDate.value = '';
         priority.value = 'low';
+        category.value = 'Autre';
         
         updateTaskList();
         updateStatistics();
@@ -168,6 +172,7 @@ function updateTaskList() {
                            onchange="toggleTask(${task.id})">
                     <span class="task-text">${task.text}</span>
                     <span class="task-priority priority-${task.priority}">${task.priority}</span>
+                    <span class="task-category">${task.category}</span>
                     ${task.dueDate ? `<span class="task-date">
                         <i class="fas fa-calendar"></i> ${task.dueDate}
                     </span>` : ''}
